@@ -35,7 +35,7 @@ $(document).ready(function () {
 
     makingBtn();
 
-    $(".giphy").on("click", function (event) {
+    $(document).on("click", ".giphy", function (event) {
         var word = $(this).attr("data-name");
         var queryURl = "http://api.giphy.com/v1/gifs/search?q=" + word  + "&api_key=2P35x6Bb2Gs5VQh6CspSeGBJwJIGjhYT&limit=10";
         console.log("button is clicked");
@@ -43,12 +43,20 @@ $(document).ready(function () {
             url: queryURl,
             method: "GET"
         }).then(function (response) {
+            var image = $("<img>");
             console.log(response);
-            console.log(response.data[0].url);
-            var url = response.data[0].url;
-            image .attr ("src",url); 
-            $image.append(image);
-        })
+            var imageUrl = response.data[i].images.downsized.url;
+            for(var key in imageUrl)
+            {
+             var currentUrl = imageUrl[key];
+             console.log(currentUrl);
+             $("#giphy-view").append(image);
+             image.attr("src", currentUrl); 
+             
+            }
+            
+           
+        });
     });
 
 });
