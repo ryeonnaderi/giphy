@@ -45,13 +45,12 @@ $(document).ready(function () {
         }).then(function (response) {
             var image = $("<img>");
             console.log(response);
-            var imageUrl = response.data[i].images.downsized.url;
-            for(var key in imageUrl)
+            for(var i = 0; i<response.data.length;i++)
             {
-             var currentUrl = imageUrl[key];
-             console.log(currentUrl);
+             var imageUrl = response.data[i].images.downsized.url;
+             console.log(imageUrl);
              $("#giphy-view").append(image);
-             image.attr("src", currentUrl); 
+             image.attr("src", imageUrl); 
              
             }
             
