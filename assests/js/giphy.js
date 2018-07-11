@@ -36,6 +36,7 @@ $(document).ready(function () {
     makingBtn();
 
     $(document).on("click", ".giphy", function (event) {
+        $("#images").empty();
         var word = $(this).attr("data-name");
         var queryURl = "http://api.giphy.com/v1/gifs/search?q=" + word  + "&api_key=2P35x6Bb2Gs5VQh6CspSeGBJwJIGjhYT&limit=10";
         console.log("button is clicked");
@@ -43,19 +44,49 @@ $(document).ready(function () {
             url: queryURl,
             method: "GET"
         }).then(function (response) {
-            var image = $("<img>");
+         
             console.log(response);
             for(var i = 0; i<response.data.length;i++)
             {
-             var imageUrl = response.data[i].images.downsized.url;
-             console.log(imageUrl);
-             $("#giphy-view").append(image);
-             image.attr("src", imageUrl); 
+            var image = $("<img>");
+             var stillUrl = response.data[i].images.fixed_height_still.url;
+             var animatedUrl = response.data[i].images.fixed_height.url;
+             console.log(stillUrl,animatedUrl);
+             image.addClass("giphy-image");
+             image.attr("src", stillUrl);
+             image.attr("data-motion",animatedUrl); 
+             image.attr("data-still",stillUrl)
+             $("#images").append(image);
+             
              
             }
             
            
         });
     });
+
+    $(document).on("click", ".giphy-image", function (event) 
+    {
+        
+         var still = $(this).attr("data-still");
+         var animate = $(this).attr("data-motion");
+        // $(this).attr("src",animate);
+         var src = $(this).attr("src")
+         va
+        if(src = still)
+        {
+            $(this).attr(src) == $(this).attr("data-motion");
+        }
+        else
+        {
+            $(this).attr(src) ==  $(this).attr("data-still");
+        }
+
+    });
+    // $(document).on("click", ".giphy-image", function (event) 
+    // {
+    //    
+    //     $(this).attr("src",still);
+    // });
 
 });
