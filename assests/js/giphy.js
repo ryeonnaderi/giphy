@@ -72,15 +72,27 @@ $(document).ready(function () {
          var animate = $(this).attr("data-motion");
         // $(this).attr("src",animate);
          var src = $(this).attr("src")
-         va
-        if(src = still)
-        {
-            $(this).attr(src) == $(this).attr("data-motion");
-        }
-        else
-        {
-            $(this).attr(src) ==  $(this).attr("data-still");
-        }
+        
+         if (state === "still") {
+            $(this).attr("src", $(this).attr("data-motion"));
+             $(this).attr("src", "animate");
+          } else {
+            $(this).attr("src", $(this).attr("data-still"));
+             $(this).attr("src", "still");
+          }
+
+
+
+
+          
+        // if(src === still)
+        // {
+        //     $(this).attr("src"), $(this).attr("");
+        // }
+        // else
+        // {
+        //     $(this).attr(src) ==  $(this).attr(still);
+        // }
 
     });
     // $(document).on("click", ".giphy-image", function (event) 
